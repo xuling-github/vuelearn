@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    <!--1.使用setTimeout函数模拟异步网络请求-->
+setTimeout(() => {
+    console.log('hello,world');
+
+    setTimeout(() => {
+        console.log('hello,python')
+    },1000)
+},1000)
+//2.使用Promise，promise的参数是一个函数,这里用箭头函数
+    //这个函数里面的参数有两个一个reslove和reject
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+    console.log('hello,world');
+    console.log('hello,world');
+    console.log('hello,world');
+    console.log('hello,world');
+
+    setTimeout(() => {
+        console.log('hello,python');
+        console.log('hello,python');
+        console.log('hello,python');
+        console.log('hello,python');
+
+        setTimeout(() => {
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+        },1000)
+    },1000)
+},1000)
+    })
+
+    //3.Promise的使用
+    new Promise((resolve, reject) => {
+        //第一次网络请求
+        setTimeout(() => {
+            resolve()
+        },1000)
+    }).then(() => {
+        // 第一次网络处理
+        console.log('hello,world');
+        console.log('hello,world');
+        console.log('hello,world');
+        console.log('hello,world');
+
+    new Promise((resolve,reject) => {
+        //第二次网络请求
+        setTimeout(() => {
+        resolve()
+    },1000)
+    }).then(() => {
+        // 第二次网络处理
+        console.log('hello,python');
+        console.log('hello,python');
+        console.log('hello,python');
+        console.log('hello,python');
+
+        new Promise((resolve,reject) => {
+            //第三次网咯请求
+            setTimeout(() => {
+            resolve()
+        },1000)
+        }).then(() => {
+            // 第三次网络处理
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+            console.log('hello.vuejs');
+        })
+    })
+    })
+    //3.Promise的分析
+    //Promise是在一些有异步操作时使用，使用Promise对这个异步操作进行封装，将网络请求同处理代码分开
+    //执行new Promise是一个构造函数，执行new之后（1.保存一些状态信息，2.执行传入的函数）
+    //比如 new Promise(abc(){}) new之后他会保存一些信息，之后去回调也就是执行abc函数
+    //在执行传入的回调函数是，会传入两个参数，reslove函数执行正确回调的数据，如果失败了及执行reject函数
+    new Promise((resolve, reject) => {
+        // 网络请求
+        // resolve(data)
+        resolve('Hello, world')
+        //当执行回调函数失败时
+        reject('error message')
+    }).then((data) => {
+        //处理网络请求的数据，因为把参数data传进来了
+        console.log(data);
+        console.log(data);
+        console.log(data);
+        console.log(data);
+    }).catch((err) => {
+        //执行打印错误信息
+        console.log(err);
+    })
+//另一种写法
+//     new Promise((resolve, reject) => {
+//         resolve('hello,world')
+//         reject('err message')
+//     }).then(成功--函数,失败--函数)
+    new Promise((resolve, reject) => {
+        resolve('hello,world')
+        reject('err message')
+    }).then((data) => {
+        console.log(data);
+    },(err) => {
+        console.log(err);
+    })
+</script>
+</body>
+</html>

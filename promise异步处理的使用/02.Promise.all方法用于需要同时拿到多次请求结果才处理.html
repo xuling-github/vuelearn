@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   //  let isResult1 = false
+   //  let isResult2 = false
+   //  $.ajax({
+   //      url: 'url1',
+   //      success: function () {
+   //          console.log('结果1');
+   //          isResult1 = true;
+   //          handleResult()
+   //      }
+   //  })
+   //  $.ajax({
+   //      url: 'url2',
+   //      success: function () {
+   //          console.log('结果2');
+   //          isResult2 = true;
+   //          handleResult()
+   //      }
+   //  })
+   // function handleResult(){
+   //      if(isResult1 && isResult2){
+   //          console.log('处理完成')
+   //      }
+   // }
+
+   //使用Promise.all拿到多次请求结果之后才处理代码,all里面是一个可迭代对象，这里是一个数组，所以results是一个数组
+    Promise.all([
+        new Promise((resolve,reject) => {
+            // $.ajax({
+            //     url: 'url1',
+            //     success: function () {
+            //         resolve(data)
+            //     }
+            // })
+            setTimeout(() => {
+                resolve('res1')
+            },1000)
+                }),
+        new Promise((resolve,reject) => {
+            // $.ajax({
+            //     url: 'url2',
+            //     success: function () {
+            //         resolve(data)
+            //     }
+            // })
+            setTimeout(() => {
+                resolve('res2')
+            },2000)
+        })
+            ]).then(results => {
+                console.log(results)
+    })
+</script>
+</body>
+</html>
